@@ -15,10 +15,6 @@ int sampleTime = 1;
 float ref = 0;
 bool hold = false;
 
-const float freq = 800;
-const float cycle = 65.0 / 100.0;
-const float hd = (cycle/freq) * pow(10,3);
-const float ld = ((1-cycle)/freq) * pow(10,3);
 
 void setup() {
   // put your setup code here, to run once:
@@ -34,11 +30,11 @@ void setup() {
 }
 
 void loop() {
-  ref = analogRead(accelPin) / 10.24;
+  ref =  analogRead(accelPin) / 10.24;
   
   potVoltage = countToVolt(analogRead(reader));
   percentOpen = voltsToPercent(potVoltage);
-  Serial.println(percentOpen);
+  Serial.println(ref);
   
 
   if (millis() >= t0) {
