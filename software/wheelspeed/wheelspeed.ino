@@ -10,14 +10,16 @@ void setup() {
 }
 
 void loop() {
-  if (millis() >= sensor.timeOld + 10) {
+  if (millis() >= sensor.timeOld + 100) {
     sensor.timeCount = millis() - sensor.timeOld;
     sensor.revsPerMilli = sensor.getRevsPerMilli(revs, sensor.timeCount);
     sensor.velocity = sensor.revsPerMilli * sensor.vConstant;
-    sensor.velocitySend = sensor.velocity * 1000;
+    sensor.velocitySend = sensor.velocity * 1000.0;
     sensor.writeVelocity(sensor.velocitySend);
     revs = 0;
     sensor.timeOld = millis();
+
+    
   }
 
 }

@@ -1,6 +1,6 @@
 #include "controller.h"
 controller cont = controller();
-float desiredSpeed = 10.0;
+float desiredSpeed = 20.0;
 int sampleTime = 1;
 
 void setup() {
@@ -13,17 +13,26 @@ void setup() {
 void loop() {
   cont.readAccel();
   cont.percentOpen = cont.readPercentOpen();
-
-  if (Serial.available() > 7) {
+  
+  if (Serial.available() >= 7) {
     cont.readVelocity();
+    Serial.println(cont.velFloat);
     cont.error = desiredSpeed - cont.velFloat;
-    cont.setPID();
+
+  }
+
+  if (cont.velFloat >= desiredSpeed && cont.manual == true) {
+    cont.manual = false;
+  }
+  if (cont.percentOpen >= 60 && cont.manual == false) {
+    cont.manual = true;
   }
 
   if (cont.manual == true) {
     cont.ref = cont.pedal;
   }
   else {
+    cont.setPID();
     cont.ref = max(0, min(100, cont.pTerm + cont.iTerm));
   }
   

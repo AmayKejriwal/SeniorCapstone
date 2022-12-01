@@ -11,7 +11,7 @@
 controller::controller()
 {
   percentOpen = 0.0; error = 0.0;
-  P = 1; I = 1;
+  P = 3; I = .4;
   pState = 0.0; iState = 0.0;
   pTerm = 0.0; iTerm = 0.0;
   ref = 0.0; pedal = 0.0;
@@ -41,7 +41,11 @@ void controller::readVelocity() {
     velIn[3] = Serial.read();
     velInt = (velIn[0]) | (velIn[1] << 8) | (velIn[2] << 16) | (velIn[3] << 24);
     velFloat = (float) velInt / 1000.0;
-    
+  }
+  else {
+    while(Serial.available()) {
+      trash = Serial.read();
+    }
   }
 }
 

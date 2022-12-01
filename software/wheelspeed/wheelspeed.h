@@ -21,9 +21,9 @@ class wheelspeed
     // Global Variables
     float revsPerMilli, velocity;
     unsigned long timeOld, timeCount;
-    const float R = 0.2286; 
+    const float R = 9; 
     const float wheelCirc = 2 * PI * R; 
-    const float vConstant = 1000 * 60 * 60 * 3.28 / (wheelCirc * 5280);
+    const float vConstant = 1000.0 * 60.0 * 60.0 * wheelCirc / (12.0 * 5280.0);
     const int countPerRev = 20; const int sensePin = 2;
     int velocitySend;
 

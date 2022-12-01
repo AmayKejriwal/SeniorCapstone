@@ -35,7 +35,7 @@ class controller
     unsigned long t0, currentTime;
     bool manual, hold;
     int token[4], velIn[4], velInt;
-
+    int trash;
 
 };
 
