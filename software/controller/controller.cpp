@@ -87,7 +87,7 @@ void controller::zero() {
 
 void controller::setPID() {
   pState = error;
-  iState += error;
+  iState += error*0.001;
   pTerm = P * pState;
   iTerm = I * iState;
 }
